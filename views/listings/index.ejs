@@ -1,0 +1,121 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+    <!-- <h3>All listings</h3> -->
+<style>
+  #filters
+  {
+    display:flex;
+    height:7rem;
+    /* flex-wrap: wrap; */
+    overflow: auto;
+    position: relative;
+    scroll-behavior: smooth;
+    align-items: center;
+  }
+  .filter
+  {
+    text-align: center;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    opacity:0.7;
+  }
+  .filter:hover
+  {
+    opacity:1;
+    cursor: pointer;
+  }
+  .filter p
+  {
+    font-size: 0.8rem;
+  }
+  .cover
+  {
+    box-shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.5);
+  }
+  .cover::before
+  {
+    position: absolute;
+    content:"";
+    z-index: 99;
+  }
+  .cover::after
+  {
+    position: absolute;
+    content:"";
+    z-index: 99;
+  }
+  .child
+  {
+    overflow: hidden;
+  }
+  #filters::-webkit-scrollbar
+  {
+    -webkit-appearance: none;
+  }
+</style>
+  <div class="cover">
+    <div id="filters">
+        <div class="filter">
+          <div class="child"><i class="fa-solid fa-fire"></i></div>
+          <p>trending</p>
+        </div>
+        <div class="filter">
+          <div class="child"><i class="fa-solid fa-bed"></i></div>
+          <p>rooms</p>
+        </div>
+        <div class="filter">
+          <div class="child"><i class="fa-solid fa-city"></i></div>
+          <p>Iconic cites</p>
+        </div>
+        <div class="filter">
+          <div class="child"><i class="fa-solid fa-mountain child-icon"></i></div>
+          <p>Mountain</p>
+        </div>
+        <div class="filter">
+          <div class="child"><i class="fa-brands fa-fort-awesome child-icon"></i></i></div>
+          <p>Castels</p>
+        </div>
+        <div class="filter">
+          <div class="child"><i class="fa-solid fa-person-swimming child-icon"></i></i></div>
+          <p>Amazing pools</p>
+        </div>
+        <div class="filter">
+          <div class="child"><i class="fa-solid fa-campground child-icon"></i></div>
+          <p>Camping</p>
+        </div>
+        <div class="filter">
+          <div class="child"><i class="fa-solid fa-cow child-icon"></i></div>
+          <p>Farms</p>
+        </div>
+        <div class="filter">
+          <div class="child"><i class="fa-regular fa-snowflake child-icon"></i></div>
+          <p>Arctic</p>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+    <!-- <form method="GET" action="/listings/new">
+        <button>Create new</button>
+    </form> -->
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3 ">
+    <% for(let listing of allListings) {%>
+    <a href="/listings/<%= listing._id %>" class="listing_link">
+    <div class="card col listing-card" >
+      <img src="<%= listing.image.url %>"  class="card-img-top" alt="listing image" style="height: 20rem">
+        <div class="card-img-overlay"></div>
+        <div class="card-body">
+          <p class="card-text">
+            <b><%= listing.title %></b>
+            <br>
+            &#8377; <%= listing.price.toLocaleString("en-IN") %> /night
+          </p>       
+        </div>
+      </div>
+    </a>
+      <% } %>
+    </div>
+    
+</body>
+
