@@ -138,11 +138,28 @@ app.use((err, req, res, next)=>
     res.render("listings/error.ejs",{err});
     //res.status(statusCode).send(message);
 });
-
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
+// ---------------------- error handling ----------------------
+app.all("*", (req, res, next) => {
+    next(new ExpressError(404, "Page not found"));
 });
+
+app.use((err, req, res, next) => {
+    let { statusCode = 500, message = "something went wrong" } = err;
+    res.status(statusCode).render("listings/error.ejs", { err });
+});
+
+// ---------------------- deployment handling ----------------------
+
+// ✅ In local development → run the server
+// ✅ In production (Vercel) → export the app instead
+if (process.env.NODE_ENV !== "production") {
+    const PORT = process.env.PORT || 8080;
+    app.listen(PORT, () => {
+        console.log(`Server is listening on port ${PORT}`);
+    });
+} else {
+    module.exports = app;
+}
 
 
 
