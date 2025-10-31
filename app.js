@@ -1,12 +1,13 @@
-if(process.env.NODE_ENV != "production")
+if(process.env.NODE_ENV !=="production")
 {
     require("dotenv").config();
 };
 
-
+console.log("MONGO_URL:", process.env.MONGO_URL);
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+
 // const Listing = require("./models/listing.js");
 const path = require("path");
 const methodOverride = require("method-override");
@@ -22,7 +23,7 @@ const passport=require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 
-const listingRouter = require("./routes/listing.js");
+const listingRouter = require("./routes/listings.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
@@ -36,11 +37,10 @@ main().then(()=>
 {
     console.log(err);
 });
+async function main() {
+  await mongoose.connect(dbUrl);
+}
 
-async function main()
-{
-    await mongoose.connect(dbUrl,{useNewUrlParser:true,useUnifiedTopology:true});
-};
 
 app.set("view engine","ejs");
 app.set("views", path.join(__dirname,"views"));
