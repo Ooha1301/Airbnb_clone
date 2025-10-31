@@ -38,7 +38,10 @@ main().then(()=>
     console.log(err);
 });
 async function main() {
-  await mongoose.connect(dbUrl);
+  await mongoose.connect(process.env.MONGO_URL)
+  .then(() => console.log("MongoDB connected"))
+  .catch(err => console.log("MongoDB connection error:", err));
+
 }
 
 
