@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "start": "node start",
-    "vercel-build": "npm install"
-  },
+  "start": "node app.js"
+},
+
   "dependencies": {
     "cloudinary": "^1.41.3",
     "connect-flash": "^0.1.1",
