@@ -155,14 +155,11 @@ app.use((err, req, res, next) => {
 
 // ✅ In local development → run the server
 // ✅ In production (Vercel) → export the app instead
-if (process.env.NODE_ENV !== "production") {
-    const PORT = process.env.PORT || 8080;
-    app.listen(PORT, () => {
-        console.log(`Server is listening on port ${PORT}`);
-    });
-} else {
-    module.exports = app;
-}
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+    console.log(`🚀 Server is listening on port ${PORT}`);
+});
+
 
 
 
